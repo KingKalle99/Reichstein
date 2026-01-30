@@ -31,8 +31,8 @@
 
     body {
       font-family: "Inter", system-ui, -apple-system, sans-serif;
-      color: var(--navy);
-      background: var(--white);
+      color: var(--white);
+      background: linear-gradient(160deg, #0b1020 0%, #0b1326 55%, #0a0f1c 100%);
       line-height: 1.6;
     }
 
@@ -59,37 +59,8 @@
     }
 
     header {
-      background: var(--white);
-      padding: 26px 0 22px;
-      position: relative;
-    }
-
-    .logo-wrap {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      position: relative;
-    }
-
-    .logo-wrap::before {
-      content: "";
-      position: absolute;
-      width: 160px;
-      height: 160px;
-      background: radial-gradient(circle, rgba(255, 255, 255, 0.98) 0%, rgba(255, 255, 255, 0.92) 45%, rgba(255, 255, 255, 0) 70%);
-      filter: blur(6px);
-      z-index: 0;
-    }
-
-    .logo {
-      width: 112px;
-      height: 112px;
-      object-fit: contain;
-      position: relative;
-      z-index: 1;
-      background: var(--white);
-      border-radius: 50%;
-      padding: 6px;
+      background: transparent;
+      padding: 12px 0;
     }
 
     .hero {
@@ -181,7 +152,7 @@
     }
 
     .search-panel {
-      background: var(--navy);
+      background: rgba(11, 16, 32, 0.92);
       color: var(--white);
       border-radius: 18px;
       padding: 28px;
@@ -233,7 +204,7 @@
       font-size: 0.82rem;
       text-transform: uppercase;
       letter-spacing: 0.08em;
-      color: rgba(255, 255, 255, 0.6);
+      color: rgba(199, 163, 90, 0.85);
     }
 
     .field input,
@@ -241,10 +212,15 @@
     .field textarea {
       padding: 10px 12px;
       border-radius: 8px;
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      background: var(--white);
+      border: 1px solid rgba(199, 163, 90, 0.6);
+      background: linear-gradient(140deg, #d6b66a 0%, #b99044 100%);
       color: var(--navy);
       transition: var(--transition);
+    }
+
+    .field input::placeholder,
+    .field textarea::placeholder {
+      color: rgba(11, 16, 32, 0.65);
     }
 
     .field input:focus,
@@ -257,7 +233,7 @@
 
     .cards-section {
       padding: 10px 0 80px;
-      background: var(--white);
+      background: transparent;
     }
 
     .cards-grid {
@@ -267,11 +243,11 @@
     }
 
     .car-card {
-      background: var(--white);
+      background: linear-gradient(150deg, #d4b166 0%, #b88b3f 100%);
       border-radius: 16px;
       overflow: hidden;
-      border: 1px solid rgba(11, 16, 32, 0.08);
-      box-shadow: 0 12px 40px rgba(11, 16, 32, 0.08);
+      border: 1px solid rgba(199, 163, 90, 0.5);
+      box-shadow: 0 18px 50px rgba(6, 10, 20, 0.35);
       transition: var(--transition);
       position: relative;
       cursor: pointer;
@@ -343,7 +319,7 @@
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 10px 12px;
       font-size: 0.9rem;
-      color: rgba(11, 16, 32, 0.85);
+      color: rgba(11, 16, 32, 0.9);
     }
 
     .facts-grid div {
@@ -356,12 +332,12 @@
       font-size: 0.72rem;
       letter-spacing: 0.06em;
       text-transform: uppercase;
-      color: rgba(11, 16, 32, 0.5);
+      color: rgba(11, 16, 32, 0.6);
     }
 
     .about {
       padding: 80px 0;
-      background: linear-gradient(180deg, rgba(11, 16, 32, 0.03) 0%, rgba(11, 16, 32, 0.06) 100%);
+      background: linear-gradient(180deg, rgba(11, 16, 32, 0.6) 0%, rgba(11, 16, 32, 0.9) 100%);
     }
 
     .about-grid {
@@ -373,12 +349,12 @@
     .about h2 {
       font-family: "Cinzel", serif;
       font-size: clamp(2rem, 3vw, 2.6rem);
-      color: var(--navy);
+      color: var(--white);
       margin-bottom: 16px;
     }
 
     .about p {
-      color: rgba(11, 16, 32, 0.8);
+      color: rgba(255, 255, 255, 0.78);
       max-width: 640px;
     }
 
@@ -390,23 +366,23 @@
     }
 
     .trust-card {
-      background: var(--white);
+      background: linear-gradient(150deg, rgba(11, 16, 32, 0.9) 0%, rgba(11, 16, 32, 0.7) 100%);
       border-radius: 14px;
       padding: 18px;
-      border: 1px solid rgba(199, 163, 90, 0.2);
-      box-shadow: 0 12px 30px rgba(11, 16, 32, 0.08);
+      border: 1px solid rgba(199, 163, 90, 0.4);
+      box-shadow: 0 12px 30px rgba(6, 10, 20, 0.35);
     }
 
     .trust-card h3 {
       font-family: "Cinzel", serif;
       font-size: 1.1rem;
-      color: var(--navy);
+      color: var(--white);
       margin-bottom: 6px;
     }
 
     .trust-card p {
       font-size: 0.92rem;
-      color: rgba(11, 16, 32, 0.7);
+      color: rgba(255, 255, 255, 0.7);
     }
 
     footer {
@@ -514,7 +490,8 @@
     .modal-body {
       padding: 18px 30px 30px;
       overflow-y: auto;
-      display: grid;
+      display: flex;
+      flex-direction: column;
       gap: 24px;
     }
 
@@ -522,6 +499,7 @@
       aspect-ratio: 16 / 9;
       border-radius: 16px;
       overflow: hidden;
+      margin-bottom: 6px;
     }
 
     .modal-image img {
@@ -605,6 +583,16 @@
     .form-accordion {
       border-top: 1px solid rgba(11, 16, 32, 0.12);
       padding-top: 16px;
+    }
+
+    .form-accordion .field label {
+      color: rgba(11, 16, 32, 0.7);
+    }
+
+    .form-accordion .field input,
+    .form-accordion .field textarea {
+      border: 1px solid rgba(199, 163, 90, 0.8);
+      background: var(--white);
     }
 
     .form-success {
@@ -713,11 +701,7 @@
   </style>
 </head>
 <body>
-  <header>
-    <div class="container logo-wrap">
-      <img class="logo" src="https://media.discordapp.net/attachments/1411474383654092890/1466603781583143016/2192546D-AE56-40C6-85FD-363955650A74.png?ex=697e0175&is=697caff5&hm=d2d9d944e7a08dc5fc87e4fc2a165fa48bbdb9bd30abab97e9ac2899e3cc69f3&=&format=webp&quality=lossless&width=648&height=648" alt="Reichstein Automobile Logo" />
-    </div>
-  </header>
+  <header></header>
 
   <section class="hero">
     <div class="container hero-grid">
