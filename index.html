@@ -1,1 +1,1270 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Reichstein Automobile – Premium-Gebrauchtwagen in Berlin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --navy: #0b1020;
+      --navy-deep: #070b16;
+      --navy-soft: rgba(11, 16, 32, 0.9);
+      --gold: #c7a35a;
+      --white: #ffffff;
+      --shadow-soft: 0 24px 60px rgba(5, 10, 20, 0.35);
+      --radius: 10px;
+      --transition: 220ms ease;
+    }
 
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Inter", system-ui, -apple-system, sans-serif;
+      color: var(--navy);
+      background: var(--white);
+      line-height: 1.6;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    input,
+    select,
+    textarea {
+      font-family: inherit;
+    }
+
+    .container {
+      width: min(1200px, 92vw);
+      margin: 0 auto;
+    }
+
+    header {
+      background: var(--white);
+      padding: 26px 0 22px;
+      position: relative;
+    }
+
+    .logo-wrap {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+
+    .logo-wrap::before {
+      content: "";
+      position: absolute;
+      width: 160px;
+      height: 160px;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.98) 0%, rgba(255, 255, 255, 0.92) 45%, rgba(255, 255, 255, 0) 70%);
+      filter: blur(6px);
+      z-index: 0;
+    }
+
+    .logo {
+      width: 112px;
+      height: 112px;
+      object-fit: contain;
+      position: relative;
+      z-index: 1;
+      background: var(--white);
+      border-radius: 50%;
+      padding: 6px;
+    }
+
+    .hero {
+      position: relative;
+      color: var(--white);
+      padding: 90px 0 110px;
+      background: linear-gradient(135deg, #0b1020 0%, #0a1328 45%, #0b0f1b 100%);
+      overflow: hidden;
+    }
+
+    .hero::before,
+    .hero::after {
+      content: "";
+      position: absolute;
+      border-radius: 999px;
+      background: radial-gradient(circle, rgba(199, 163, 90, 0.22) 0%, rgba(199, 163, 90, 0) 70%);
+      filter: blur(6px);
+      opacity: 0.8;
+      pointer-events: none;
+    }
+
+    .hero::before {
+      width: 320px;
+      height: 320px;
+      top: -140px;
+      right: 8%;
+    }
+
+    .hero::after {
+      width: 260px;
+      height: 260px;
+      bottom: -140px;
+      left: 5%;
+    }
+
+    .hero-grid {
+      display: grid;
+      gap: 28px;
+      align-items: center;
+    }
+
+    .hero h1 {
+      font-family: "Cinzel", serif;
+      font-weight: 600;
+      font-size: clamp(2.4rem, 4vw, 3.6rem);
+      letter-spacing: 0.02em;
+      margin-bottom: 18px;
+    }
+
+    .hero p {
+      font-size: 1.1rem;
+      max-width: 520px;
+      color: rgba(255, 255, 255, 0.86);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 26px;
+      border-radius: 8px;
+      border: 1px solid var(--gold);
+      background: transparent;
+      color: var(--white);
+      font-weight: 500;
+      transition: var(--transition);
+      cursor: pointer;
+    }
+
+    .btn:hover,
+    .btn:focus-visible {
+      background: var(--gold);
+      color: var(--navy);
+      box-shadow: 0 10px 30px rgba(199, 163, 90, 0.3);
+      transform: translateY(-1px);
+    }
+
+    .btn:focus-visible {
+      outline: 2px solid rgba(199, 163, 90, 0.6);
+      outline-offset: 2px;
+    }
+
+    .search-section {
+      position: relative;
+      margin-top: -60px;
+      z-index: 2;
+      padding-bottom: 60px;
+    }
+
+    .search-panel {
+      background: var(--navy);
+      color: var(--white);
+      border-radius: 18px;
+      padding: 28px;
+      box-shadow: var(--shadow-soft);
+      border: 1px solid rgba(199, 163, 90, 0.2);
+    }
+
+    .search-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+
+    .search-title {
+      font-family: "Cinzel", serif;
+      font-size: 1.4rem;
+      font-weight: 600;
+    }
+
+    .result-count {
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 0.95rem;
+    }
+
+    .filter-toggle {
+      display: none;
+      background: transparent;
+      border: 1px solid rgba(199, 163, 90, 0.6);
+      color: var(--white);
+      padding: 8px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .filters {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+      gap: 16px;
+    }
+
+    .field {
+      display: grid;
+      gap: 6px;
+    }
+
+    .field label {
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    .field input,
+    .field select,
+    .field textarea {
+      padding: 10px 12px;
+      border-radius: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      background: var(--white);
+      color: var(--navy);
+      transition: var(--transition);
+    }
+
+    .field input:focus,
+    .field select:focus,
+    .field textarea:focus {
+      outline: none;
+      border-color: var(--gold);
+      box-shadow: 0 0 0 2px rgba(199, 163, 90, 0.3);
+    }
+
+    .cards-section {
+      padding: 10px 0 80px;
+      background: var(--white);
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 24px;
+    }
+
+    .car-card {
+      background: var(--white);
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid rgba(11, 16, 32, 0.08);
+      box-shadow: 0 12px 40px rgba(11, 16, 32, 0.08);
+      transition: var(--transition);
+      position: relative;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      min-height: 100%;
+    }
+
+    .car-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 16px;
+      border: 1px solid transparent;
+      transition: var(--transition);
+      pointer-events: none;
+    }
+
+    .car-card:hover,
+    .car-card:focus-visible {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 60px rgba(11, 16, 32, 0.15);
+    }
+
+    .car-card:hover::after,
+    .car-card:focus-visible::after {
+      border-color: rgba(199, 163, 90, 0.6);
+      box-shadow: 0 0 22px rgba(199, 163, 90, 0.25);
+    }
+
+    .car-image {
+      aspect-ratio: 16 / 10;
+      overflow: hidden;
+    }
+
+    .car-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .car-body {
+      padding: 20px;
+      display: grid;
+      gap: 14px;
+    }
+
+    .car-title {
+      font-family: "Cinzel", serif;
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--navy);
+    }
+
+    .car-price {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--navy);
+    }
+
+    .car-price span {
+      color: rgba(11, 16, 32, 0.7);
+      font-size: 0.85rem;
+      font-weight: 400;
+    }
+
+    .facts-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px 12px;
+      font-size: 0.9rem;
+      color: rgba(11, 16, 32, 0.85);
+    }
+
+    .facts-grid div {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .facts-grid span {
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: rgba(11, 16, 32, 0.5);
+    }
+
+    .about {
+      padding: 80px 0;
+      background: linear-gradient(180deg, rgba(11, 16, 32, 0.03) 0%, rgba(11, 16, 32, 0.06) 100%);
+    }
+
+    .about-grid {
+      display: grid;
+      gap: 32px;
+      align-items: start;
+    }
+
+    .about h2 {
+      font-family: "Cinzel", serif;
+      font-size: clamp(2rem, 3vw, 2.6rem);
+      color: var(--navy);
+      margin-bottom: 16px;
+    }
+
+    .about p {
+      color: rgba(11, 16, 32, 0.8);
+      max-width: 640px;
+    }
+
+    .trust-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 16px;
+      margin-top: 24px;
+    }
+
+    .trust-card {
+      background: var(--white);
+      border-radius: 14px;
+      padding: 18px;
+      border: 1px solid rgba(199, 163, 90, 0.2);
+      box-shadow: 0 12px 30px rgba(11, 16, 32, 0.08);
+    }
+
+    .trust-card h3 {
+      font-family: "Cinzel", serif;
+      font-size: 1.1rem;
+      color: var(--navy);
+      margin-bottom: 6px;
+    }
+
+    .trust-card p {
+      font-size: 0.92rem;
+      color: rgba(11, 16, 32, 0.7);
+    }
+
+    footer {
+      background: var(--navy-deep);
+      color: var(--white);
+      padding: 50px 0 60px;
+    }
+
+    .footer-divider {
+      height: 1px;
+      width: 100%;
+      background: linear-gradient(90deg, rgba(199, 163, 90, 0) 0%, rgba(199, 163, 90, 0.6) 50%, rgba(199, 163, 90, 0) 100%);
+      margin-bottom: 26px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 24px;
+    }
+
+    .footer-grid h4 {
+      font-family: "Cinzel", serif;
+      font-size: 1.1rem;
+      margin-bottom: 12px;
+      color: var(--white);
+    }
+
+    .footer-grid p,
+    .footer-grid a {
+      color: rgba(255, 255, 255, 0.75);
+      font-size: 0.95rem;
+    }
+
+    .footer-grid a:hover,
+    .footer-grid a:focus-visible {
+      color: var(--gold);
+    }
+
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(6, 10, 20, 0.75);
+      backdrop-filter: blur(6px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 30px;
+      opacity: 0;
+      pointer-events: none;
+      transition: var(--transition);
+      z-index: 200;
+    }
+
+    .modal-backdrop.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal {
+      background: var(--white);
+      border-radius: 20px;
+      max-width: 900px;
+      width: 100%;
+      max-height: 90vh;
+      overflow: hidden;
+      display: grid;
+      grid-template-rows: auto 1fr;
+      box-shadow: var(--shadow-soft);
+      position: relative;
+    }
+
+    .modal-header {
+      padding: 24px 30px 0;
+      display: grid;
+      gap: 10px;
+    }
+
+    .modal-title {
+      font-family: "Cinzel", serif;
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      color: var(--navy);
+    }
+
+    .modal-price {
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: var(--navy);
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(199, 163, 90, 0.7);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--navy);
+      width: fit-content;
+    }
+
+    .modal-body {
+      padding: 18px 30px 30px;
+      overflow-y: auto;
+      display: grid;
+      gap: 24px;
+    }
+
+    .modal-image {
+      aspect-ratio: 16 / 9;
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    .modal-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .details-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 16px;
+    }
+
+    .detail-card {
+      border: 1px solid rgba(11, 16, 32, 0.08);
+      border-radius: 12px;
+      padding: 12px 14px;
+      background: rgba(11, 16, 32, 0.02);
+    }
+
+    .detail-card span {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: rgba(11, 16, 32, 0.5);
+    }
+
+    .detail-card strong {
+      display: block;
+      font-size: 0.95rem;
+      margin-top: 4px;
+      color: var(--navy);
+    }
+
+    .accordion {
+      border-top: 1px solid rgba(11, 16, 32, 0.12);
+    }
+
+    .accordion button {
+      width: 100%;
+      padding: 16px 0;
+      background: none;
+      border: none;
+      text-align: left;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--navy);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+    }
+
+    .accordion button span {
+      font-family: "Cinzel", serif;
+    }
+
+    .accordion-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 300ms ease;
+    }
+
+    .accordion-content-inner {
+      padding-bottom: 16px;
+      color: rgba(11, 16, 32, 0.8);
+    }
+
+    .accordion-content ul {
+      display: grid;
+      gap: 6px;
+      padding-left: 18px;
+    }
+
+    .modal-cta {
+      display: flex;
+      justify-content: flex-start;
+    }
+
+    .form-accordion {
+      border-top: 1px solid rgba(11, 16, 32, 0.12);
+      padding-top: 16px;
+    }
+
+    .form-success {
+      margin-top: 14px;
+      padding: 14px 16px;
+      border-radius: 12px;
+      border: 1px solid rgba(199, 163, 90, 0.6);
+      background: rgba(199, 163, 90, 0.08);
+      color: var(--navy);
+      font-weight: 500;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      border: 1px solid rgba(11, 16, 32, 0.2);
+      background: var(--white);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .modal-close:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    .modal-close::before,
+    .modal-close::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 16px;
+      height: 2px;
+      background: currentColor;
+      transform-origin: center;
+    }
+
+    .modal-close::before {
+      transform: translate(-50%, -50%) rotate(45deg);
+    }
+
+    .modal-close::after {
+      transform: translate(-50%, -50%) rotate(-45deg);
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    @media (max-width: 960px) {
+      .cards-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .hero {
+        padding: 70px 0 90px;
+      }
+
+      .search-section {
+        margin-top: -40px;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .cards-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .filters {
+        grid-template-columns: 1fr;
+      }
+
+      .filter-toggle {
+        display: inline-flex;
+      }
+
+      .filters.collapsed {
+        display: none;
+      }
+
+      .modal-backdrop {
+        padding: 16px;
+        align-items: flex-end;
+      }
+
+      .modal {
+        border-radius: 20px 20px 0 0;
+        max-height: 92vh;
+      }
+
+      .modal-header,
+      .modal-body {
+        padding: 18px 20px 24px;
+      }
+
+      .modal-close {
+        top: 12px;
+        right: 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container logo-wrap">
+      <img class="logo" src="https://media.discordapp.net/attachments/1411474383654092890/1466603781583143016/2192546D-AE56-40C6-85FD-363955650A74.png?ex=697e0175&is=697caff5&hm=d2d9d944e7a08dc5fc87e4fc2a165fa48bbdb9bd30abab97e9ac2899e3cc69f3&=&format=webp&quality=lossless&width=648&height=648" alt="Reichstein Automobile Logo" />
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container hero-grid">
+      <div>
+        <h1>Premium-Gebrauchtwagen in Berlin.</h1>
+        <p>Seit über 20 Jahren Maßstäbe für Premium-Fahrzeuge – in Berlin und international.</p>
+      </div>
+      <div>
+        <a class="btn" href="#fahrzeuge">Fahrzeuge entdecken</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="fahrzeuge" class="search-section">
+    <div class="container search-panel">
+      <div class="search-header">
+        <div>
+          <div class="search-title">Fahrzeugsuche</div>
+          <div class="result-count" id="resultCount">0 Fahrzeuge gefunden</div>
+        </div>
+        <button class="filter-toggle" id="filterToggle" type="button">Filter anzeigen</button>
+      </div>
+      <div class="filters" id="filters">
+        <div class="field">
+          <label for="searchInput">Suche</label>
+          <input id="searchInput" type="text" placeholder="Marke, Modell, Keywords" />
+        </div>
+        <div class="field">
+          <label for="brandSelect">Marke</label>
+          <select id="brandSelect">
+            <option value="">Alle Marken</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="bodySelect">Karosserie</label>
+          <select id="bodySelect">
+            <option value="">Alle Typen</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="fuelSelect">Kraftstoff</label>
+          <select id="fuelSelect">
+            <option value="">Alle</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="gearSelect">Getriebe</label>
+          <select id="gearSelect">
+            <option value="">Alle</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="vatSelect">MwSt. ausweisbar</label>
+          <select id="vatSelect">
+            <option value="">Alle</option>
+            <option value="true">Ja</option>
+            <option value="false">Nein</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="priceMin">Preis min (€)</label>
+          <input id="priceMin" type="number" min="0" placeholder="z.B. 40000" />
+        </div>
+        <div class="field">
+          <label for="priceMax">Preis max (€)</label>
+          <input id="priceMax" type="number" min="0" placeholder="z.B. 120000" />
+        </div>
+        <div class="field">
+          <label for="kmMax">Kilometer max</label>
+          <input id="kmMax" type="number" min="0" placeholder="z.B. 60000" />
+        </div>
+        <div class="field">
+          <label for="ezFrom">EZ von (JJJJ)</label>
+          <input id="ezFrom" type="number" min="1990" max="2030" placeholder="z.B. 2016" />
+        </div>
+        <div class="field">
+          <label for="ezTo">EZ bis (JJJJ)</label>
+          <input id="ezTo" type="number" min="1990" max="2030" placeholder="z.B. 2023" />
+        </div>
+        <div class="field">
+          <label for="sortSelect">Sortierung</label>
+          <select id="sortSelect">
+            <option value="">Empfohlen</option>
+            <option value="price-asc">Preis aufsteigend</option>
+            <option value="price-desc">Preis absteigend</option>
+            <option value="km-asc">Kilometer aufsteigend</option>
+            <option value="km-desc">Kilometer absteigend</option>
+            <option value="ez-desc">EZ neu → alt</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cards-section">
+    <div class="container">
+      <div class="cards-grid" id="cardsGrid"></div>
+    </div>
+  </section>
+
+  <section class="about">
+    <div class="container about-grid">
+      <div>
+        <h2>Über uns</h2>
+        <p>Reichstein Automobile steht seit über zwei Jahrzehnten für Premium-Fahrzeuge mit Herkunft, Qualität und Charakter. Unsere Auswahl erstreckt sich über Marken wie Mercedes-Benz, Porsche, BMW und Audi – ergänzt um besondere Exklusivfahrzeuge für anspruchsvolle Fahrerinnen und Fahrer.</p>
+        <p>2012 sind wir in unsere 5.400 qm große Ausstellung in Berlin umgezogen. Heute präsentieren wir permanent bis zu 250 Fahrzeuge, sorgfältig geprüft und detailgenau aufbereitet. Unser Anspruch: die erste Anlaufstelle in Berlin zu sein, wenn es um Sicherheit, Transparenz und langfristige Freude am Fahrzeug geht.</p>
+      </div>
+      <div class="trust-grid">
+        <div class="trust-card">
+          <h3>20+ Jahre Erfahrung</h3>
+          <p>Marktkenntnis, die Vertrauen schafft.</p>
+        </div>
+        <div class="trust-card">
+          <h3>5.400 qm Ausstellung</h3>
+          <p>Raum für Auswahl in Premiumqualität.</p>
+        </div>
+        <div class="trust-card">
+          <h3>250+ Fahrzeuge</h3>
+          <p>Ständig verfügbar, sofort bereit.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="footer-divider"></div>
+      <div class="footer-grid">
+        <div>
+          <h4>Öffnungszeiten</h4>
+          <p>Montag 09:30 – 18:30</p>
+          <p>Dienstag 09:30 – 18:30</p>
+          <p>Mittwoch 09:30 – 18:30</p>
+          <p>Donnerstag 09:30 – 18:30</p>
+          <p>Freitag 09:30 – 18:30</p>
+          <p>Samstag 09:30 – 15:00</p>
+          <p>Sonntag Geschlossen</p>
+        </div>
+        <div>
+          <h4>Kontakt</h4>
+          <p>Reichstein Automobile</p>
+          <p>Koloniestr. 91-93</p>
+          <p>13359 Berlin</p>
+          <p>Tel.: <a href="tel:03074374315">030 - 74374315</a></p>
+          <p>Fax: 030 - 74374316</p>
+          <p>E-Mail: <a href="mailto:info@reichsteinautomobile.de">info@reichsteinautomobile.de</a></p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <div class="modal-backdrop" id="modalBackdrop" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <button class="modal-close" type="button" aria-label="Modal schließen"></button>
+      <div class="modal-header">
+        <div class="modal-title" id="modalTitle"></div>
+        <div class="modal-price" id="modalPrice"></div>
+        <div class="badge hidden" id="modalVat">MwSt. ausweisbar</div>
+      </div>
+      <div class="modal-body">
+        <div class="modal-image"><img id="modalImage" alt="" /></div>
+        <div class="details-grid" id="detailsGrid"></div>
+        <div class="accordion" data-accordion>
+          <button type="button" aria-expanded="false"><span>Ausstattung</span><strong>+</strong></button>
+          <div class="accordion-content">
+            <div class="accordion-content-inner">
+              <ul id="equipmentList"></ul>
+            </div>
+          </div>
+        </div>
+        <div class="accordion" data-accordion>
+          <button type="button" aria-expanded="false"><span>Merkmale</span><strong>+</strong></button>
+          <div class="accordion-content">
+            <div class="accordion-content-inner">
+              <ul id="featureList"></ul>
+            </div>
+          </div>
+        </div>
+        <div class="modal-cta">
+          <button class="btn" id="ctaButton" type="button">Fahrzeug anfragen</button>
+        </div>
+        <div class="form-accordion hidden" id="formAccordion">
+          <form id="inquiryForm">
+            <div class="filters" style="grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));">
+              <div class="field">
+                <label for="firstName">Vorname *</label>
+                <input id="firstName" name="firstName" type="text" required />
+              </div>
+              <div class="field">
+                <label for="lastName">Nachname *</label>
+                <input id="lastName" name="lastName" type="text" required />
+              </div>
+              <div class="field">
+                <label for="email">E-Mail *</label>
+                <input id="email" name="email" type="email" required />
+              </div>
+              <div class="field">
+                <label for="phone">Telefon (optional)</label>
+                <input id="phone" name="phone" type="tel" placeholder="z.B. +49 30 123456" />
+              </div>
+              <div class="field" style="grid-column: 1 / -1;">
+                <label for="message">Nachricht *</label>
+                <textarea id="message" name="message" rows="4" required></textarea>
+              </div>
+              <div class="field" style="grid-column: 1 / -1;">
+                <label style="display: flex; align-items: center; gap: 10px; text-transform: none; letter-spacing: 0; font-size: 0.95rem; color: rgba(11, 16, 32, 0.8);">
+                  <input id="privacy" type="checkbox" required />
+                  Datenschutz gelesen und akzeptiert.
+                </label>
+              </div>
+            </div>
+            <div style="margin-top: 16px; display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
+              <button class="btn" type="submit">Anfrage senden</button>
+              <span id="submitHint" style="color: rgba(11, 16, 32, 0.6);"></span>
+            </div>
+            <div class="form-success hidden" id="formSuccess"></div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const carData = [
+      {
+        id: 1,
+        name: "Mercedes-Benz G 500 AMG NIGHT EDITION",
+        brand: "Mercedes-Benz",
+        model: "G 500",
+        ez: "05/22",
+        ezYear: 2022,
+        km: 45831,
+        power: "310 kW / 421 PS",
+        price: 131980,
+        vat: true,
+        displacement: "3982 ccm",
+        fuel: "Super",
+        body: "SUV/Geländewagen",
+        hu: "05/27",
+        hand: "2.Hand",
+        gearbox: "Automatik",
+        image: "https://www.car-copy.com/carcopy/bpic/6059019838001200/202601161326532671.jpg",
+        equipment: ["Lederinterieur", "Sitzheizung", "360°-Kamera", "Navigationssystem", "LED-Scheinwerfer", "Panorama-Glasdach"],
+        features: ["Scheckheftgepflegt", "Nichtraucherfahrzeug", "Garagenfahrzeug", "Premium-Aufbereitung"]
+      },
+      {
+        id: 2,
+        name: "Porsche 911 Carrera 4S Cabrio",
+        brand: "Porsche",
+        model: "911 Carrera 4S",
+        ez: "06/14",
+        ezYear: 2014,
+        km: 128966,
+        power: "294 kW / 400 PS",
+        price: 85911,
+        vat: false,
+        displacement: "3800 ccm",
+        fuel: "Super",
+        body: "Cabrio",
+        hu: "-",
+        hand: "2.Hand",
+        gearbox: "Automatik",
+        image: "https://www.car-copy.com/carcopy/spic/9049019824001100/202306091724419446.jpg",
+        equipment: ["Lederinterieur", "Sitzheizung", "Porsche Communication Management", "Parkassistent", "Sportabgasanlage"],
+        features: ["Scheckheftgepflegt", "Nichtraucherfahrzeug", "Sommerfahrzeug"]
+      },
+      {
+        id: 3,
+        name: "Audi A6 55 TFSI e quattro S LINE",
+        brand: "Audi",
+        model: "A6 55 TFSI e",
+        ez: "05/21",
+        ezYear: 2021,
+        km: 44200,
+        power: "270 kW / 367 PS",
+        price: 39900,
+        vat: true,
+        displacement: "1984 ccm",
+        fuel: "k.A.",
+        body: "Limousine",
+        hu: "-",
+        hand: "1.Hand",
+        gearbox: "Automatik",
+        image: "https://www.car-copy.com/carcopy/spic/3242019806001200/202503061821138192.jpg",
+        equipment: ["Leder/Alcantara", "Sitzheizung", "Virtual Cockpit", "Rückfahrkamera", "Matrix-LED"],
+        features: ["Scheckheftgepflegt", "Nichtraucherfahrzeug", "Garantie verfügbar"]
+      }
+    ];
+
+    const filters = {
+      searchInput: document.getElementById("searchInput"),
+      brandSelect: document.getElementById("brandSelect"),
+      bodySelect: document.getElementById("bodySelect"),
+      fuelSelect: document.getElementById("fuelSelect"),
+      gearSelect: document.getElementById("gearSelect"),
+      vatSelect: document.getElementById("vatSelect"),
+      priceMin: document.getElementById("priceMin"),
+      priceMax: document.getElementById("priceMax"),
+      kmMax: document.getElementById("kmMax"),
+      ezFrom: document.getElementById("ezFrom"),
+      ezTo: document.getElementById("ezTo"),
+      sortSelect: document.getElementById("sortSelect")
+    };
+
+    const cardsGrid = document.getElementById("cardsGrid");
+    const resultCount = document.getElementById("resultCount");
+
+    const modalBackdrop = document.getElementById("modalBackdrop");
+    const modalTitle = document.getElementById("modalTitle");
+    const modalPrice = document.getElementById("modalPrice");
+    const modalVat = document.getElementById("modalVat");
+    const modalImage = document.getElementById("modalImage");
+    const detailsGrid = document.getElementById("detailsGrid");
+    const equipmentList = document.getElementById("equipmentList");
+    const featureList = document.getElementById("featureList");
+    const modalClose = document.querySelector(".modal-close");
+    const ctaButton = document.getElementById("ctaButton");
+    const formAccordion = document.getElementById("formAccordion");
+    const inquiryForm = document.getElementById("inquiryForm");
+    const submitHint = document.getElementById("submitHint");
+    const formSuccess = document.getElementById("formSuccess");
+
+    let activeTrigger = null;
+
+    const formatPrice = (value) => value.toLocaleString("de-DE", { style: "currency", currency: "EUR", maximumFractionDigits: 0 });
+    const formatKm = (value) => value.toLocaleString("de-DE") + " km";
+
+    const uniqueOptions = (key) => [...new Set(carData.map((car) => car[key]).filter(Boolean))];
+
+    const populateSelect = (select, values) => {
+      values.forEach((value) => {
+        const option = document.createElement("option");
+        option.value = value;
+        option.textContent = value;
+        select.append(option);
+      });
+    };
+
+    populateSelect(filters.brandSelect, uniqueOptions("brand"));
+    populateSelect(filters.bodySelect, uniqueOptions("body"));
+    populateSelect(filters.fuelSelect, uniqueOptions("fuel"));
+    populateSelect(filters.gearSelect, uniqueOptions("gearbox"));
+
+    const buildCard = (car) => {
+      const card = document.createElement("article");
+      card.className = "car-card";
+      card.tabIndex = 0;
+      card.setAttribute("role", "button");
+      card.setAttribute("aria-label", `Details zu ${car.name}`);
+      card.innerHTML = `
+        <div class="car-image"><img src="${car.image}" alt="${car.name}"></div>
+        <div class="car-body">
+          <div>
+            <div class="car-title">${car.name}</div>
+            <div class="car-price">${formatPrice(car.price)} ${car.vat ? "<span>(MwSt. ausweisbar)</span>" : ""}</div>
+          </div>
+          <div class="facts-grid">
+            <div><span>EZ</span><strong>${car.ez}</strong></div>
+            <div><span>Kilometer</span><strong>${formatKm(car.km)}</strong></div>
+            <div><span>Leistung</span><strong>${car.power}</strong></div>
+            <div><span>Getriebe</span><strong>${car.gearbox}</strong></div>
+          </div>
+        </div>
+      `;
+      card.addEventListener("click", () => openModal(car, card));
+      card.addEventListener("keydown", (event) => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          openModal(car, card);
+        }
+      });
+      return card;
+    };
+
+    const renderCards = (cars) => {
+      cardsGrid.innerHTML = "";
+      cars.forEach((car) => cardsGrid.append(buildCard(car)));
+      resultCount.textContent = `${cars.length} Fahrzeuge gefunden`;
+    };
+
+    const applyFilters = () => {
+      const searchValue = filters.searchInput.value.trim().toLowerCase();
+      const brandValue = filters.brandSelect.value;
+      const bodyValue = filters.bodySelect.value;
+      const fuelValue = filters.fuelSelect.value;
+      const gearValue = filters.gearSelect.value;
+      const vatValue = filters.vatSelect.value;
+      const priceMin = Number(filters.priceMin.value) || 0;
+      const priceMax = Number(filters.priceMax.value) || Infinity;
+      const kmMax = Number(filters.kmMax.value) || Infinity;
+      const ezFrom = Number(filters.ezFrom.value) || 0;
+      const ezTo = Number(filters.ezTo.value) || Infinity;
+
+      let filtered = carData.filter((car) => {
+        const matchesSearch = !searchValue || car.name.toLowerCase().includes(searchValue) || car.model.toLowerCase().includes(searchValue);
+        const matchesBrand = !brandValue || car.brand === brandValue;
+        const matchesBody = !bodyValue || car.body === bodyValue;
+        const matchesFuel = !fuelValue || car.fuel === fuelValue;
+        const matchesGear = !gearValue || car.gearbox === gearValue;
+        const matchesVat = !vatValue || String(car.vat) === vatValue;
+        const matchesPrice = car.price >= priceMin && car.price <= priceMax;
+        const matchesKm = car.km <= kmMax;
+        const matchesEz = car.ezYear >= ezFrom && car.ezYear <= ezTo;
+
+        return matchesSearch && matchesBrand && matchesBody && matchesFuel && matchesGear && matchesVat && matchesPrice && matchesKm && matchesEz;
+      });
+
+      switch (filters.sortSelect.value) {
+        case "price-asc":
+          filtered = filtered.sort((a, b) => a.price - b.price);
+          break;
+        case "price-desc":
+          filtered = filtered.sort((a, b) => b.price - a.price);
+          break;
+        case "km-asc":
+          filtered = filtered.sort((a, b) => a.km - b.km);
+          break;
+        case "km-desc":
+          filtered = filtered.sort((a, b) => b.km - a.km);
+          break;
+        case "ez-desc":
+          filtered = filtered.sort((a, b) => b.ezYear - a.ezYear);
+          break;
+        default:
+          filtered = filtered.sort((a, b) => b.price - a.price);
+          break;
+      }
+
+      renderCards(filtered);
+    };
+
+    Object.values(filters).forEach((input) => {
+      input.addEventListener("input", applyFilters);
+      input.addEventListener("change", applyFilters);
+    });
+
+    const openModal = (car, trigger) => {
+      activeTrigger = trigger;
+      modalTitle.textContent = car.name;
+      modalPrice.textContent = formatPrice(car.price);
+      modalVat.classList.toggle("hidden", !car.vat);
+      modalImage.src = car.image;
+      modalImage.alt = car.name;
+
+      detailsGrid.innerHTML = `
+        <div class="detail-card"><span>Erstzulassung</span><strong>${car.ez}</strong></div>
+        <div class="detail-card"><span>Kilometer</span><strong>${formatKm(car.km)}</strong></div>
+        <div class="detail-card"><span>Leistung</span><strong>${car.power}</strong></div>
+        <div class="detail-card"><span>Hubraum</span><strong>${car.displacement}</strong></div>
+        <div class="detail-card"><span>Kraftstoff</span><strong>${car.fuel}</strong></div>
+        <div class="detail-card"><span>Fahrzeugtyp</span><strong>${car.body}</strong></div>
+        <div class="detail-card"><span>HU</span><strong>${car.hu}</strong></div>
+        <div class="detail-card"><span>Hand</span><strong>${car.hand}</strong></div>
+        <div class="detail-card"><span>Getriebe</span><strong>${car.gearbox}</strong></div>
+      `;
+
+      equipmentList.innerHTML = car.equipment.map((item) => `<li>${item}</li>`).join("");
+      featureList.innerHTML = car.features.map((item) => `<li>${item}</li>`).join("");
+      inquiryForm.reset();
+      submitHint.textContent = "";
+      formSuccess.classList.add("hidden");
+      formAccordion.classList.add("hidden");
+      document.getElementById("message").value = `Ich interessiere mich für: ${car.name}`;
+
+      modalBackdrop.classList.add("active");
+      modalBackdrop.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+      setTimeout(() => {
+        modalClose.focus();
+      }, 50);
+    };
+
+    const closeModal = () => {
+      modalBackdrop.classList.remove("active");
+      modalBackdrop.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+      if (activeTrigger) {
+        activeTrigger.focus();
+      }
+    };
+
+    modalBackdrop.addEventListener("click", (event) => {
+      if (event.target === modalBackdrop) {
+        closeModal();
+      }
+    });
+
+    modalClose.addEventListener("click", closeModal);
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && modalBackdrop.classList.contains("active")) {
+        closeModal();
+      }
+    });
+
+    const accordions = document.querySelectorAll("[data-accordion]");
+    accordions.forEach((accordion) => {
+      const button = accordion.querySelector("button");
+      const content = accordion.querySelector(".accordion-content");
+      button.addEventListener("click", () => {
+        const isOpen = button.getAttribute("aria-expanded") === "true";
+        button.setAttribute("aria-expanded", String(!isOpen));
+        button.querySelector("strong").textContent = isOpen ? "+" : "–";
+        content.style.maxHeight = isOpen ? "0px" : `${content.scrollHeight}px`;
+      });
+    });
+
+    ctaButton.addEventListener("click", () => {
+      formAccordion.classList.toggle("hidden");
+      if (!formAccordion.classList.contains("hidden")) {
+        formAccordion.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    });
+
+    inquiryForm.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      if (!inquiryForm.checkValidity()) {
+        submitHint.textContent = "Bitte alle Pflichtfelder ausfüllen.";
+        return;
+      }
+
+      const formData = new FormData(inquiryForm);
+      const message = `Anfrage für ${modalTitle.textContent}\n\nVorname: ${formData.get("firstName")}\nNachname: ${formData.get("lastName")}\nE-Mail: ${formData.get("email")}\nTelefon: ${formData.get("phone") || "-"}\n\nNachricht:\n${formData.get("message")}`;
+
+      let feedback = "Vielen Dank – wir melden uns kurzfristig.";
+      try {
+        await navigator.clipboard.writeText(message);
+        feedback += " Ihre Anfrage wurde in die Zwischenablage kopiert.";
+      } catch (error) {
+        const mailto = `mailto:info@reichsteinautomobile.de?subject=Fahrzeuganfrage&body=${encodeURIComponent(message)}`;
+        feedback += ` Sie können die Anfrage direkt per Mail senden: ${mailto}`;
+      }
+
+      formSuccess.textContent = feedback;
+      formSuccess.classList.remove("hidden");
+      submitHint.textContent = "";
+      inquiryForm.reset();
+    });
+
+    const filterToggle = document.getElementById("filterToggle");
+    const filtersPanel = document.getElementById("filters");
+    filterToggle.addEventListener("click", () => {
+      filtersPanel.classList.toggle("collapsed");
+      filterToggle.textContent = filtersPanel.classList.contains("collapsed") ? "Filter anzeigen" : "Filter ausblenden";
+    });
+
+    applyFilters();
+  </script>
+</body>
+</html>
